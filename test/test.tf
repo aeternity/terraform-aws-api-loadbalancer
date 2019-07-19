@@ -1,5 +1,5 @@
 locals {
-  fqdn = format("%s%s", substr(var.envid, 0, 15), var.domain_sfx)
+  fqdn = format("lb%s%s", var.envid, var.domain_sfx)
 }
 
 # TODO - change module source once it is merged to master
