@@ -2,9 +2,8 @@ locals {
   fqdn = format("lb%s%s", var.envid, var.domain_sfx)
 }
 
-# TODO - change module source once it is merged to master
 module "test_nodes_sydney" {
-  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=refactor"
+  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=master"
   env               = "test"
   envid             = "${var.envid}"
   bootstrap_version = "${var.bootstrap_version}"
