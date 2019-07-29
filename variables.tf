@@ -21,9 +21,11 @@ variable "dns_zone" {
 variable "internal_api_enabled" {
   description = "Enable internal API listener and allow traffic in security group"
   type        = bool
+  default     = false
 }
 
 variable "state_channel_api_enabled" {
   description = "Enable state channels websockets API listener and allow traffic in security group"
   type        = bool
+  default     = false
 }
