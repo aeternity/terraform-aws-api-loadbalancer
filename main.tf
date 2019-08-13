@@ -38,6 +38,12 @@ resource "aws_lb_target_group" "external_api" {
     port                = 8080
     interval            = 30
   }
+
+  stickiness {
+    enabled         = true
+    type            = "lb_cookie"
+    cookie_duration = 86400
+  }
 }
 
 resource "aws_lb_target_group" "internal_api" {
@@ -54,6 +60,12 @@ resource "aws_lb_target_group" "internal_api" {
     path                = "/healthz"
     port                = 8080
     interval            = 30
+  }
+
+  stickiness {
+    enabled         = true
+    type            = "lb_cookie"
+    cookie_duration = 86400
   }
 }
 
