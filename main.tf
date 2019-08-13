@@ -105,13 +105,13 @@ resource "aws_lb_listener_rule" "health_check" {
   }
 }
 
-resource "aws_lb_listener_rule" "dry-run" {
+resource "aws_lb_listener_rule" "internal_api" {
   count        = var.internal_api_enabled ? 1 : 0
   listener_arn = "${aws_alb_listener.api.arn}"
 
   condition {
     field  = "path-pattern"
-    values = ["/v2/debug/transactions/dry-run"]
+    values = ["/v2/debug/*"]
   }
 
   action {
