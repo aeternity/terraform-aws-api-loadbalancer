@@ -34,6 +34,7 @@ module "test_nodes_sydney" {
 
 module "test_gateway_lb" {
   source                    = "../"
+  env                       = "test"
   internal_api_enabled      = true
   state_channel_api_enabled = true
   dns_zone                  = var.dns_zone

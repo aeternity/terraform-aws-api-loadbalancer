@@ -6,6 +6,10 @@ resource "aws_lb" "api" {
   subnets            = var.subnets
 
   enable_deletion_protection = false
+
+  tags = {
+    env = "${var.env}"
+  }
 }
 
 resource "aws_lb_target_group" "api_health_check" {
@@ -21,6 +25,10 @@ resource "aws_lb_target_group" "api_health_check" {
     path                = "/healthz"
     port                = 8080
     interval            = 30
+  }
+
+  tags = {
+    env = "${var.env}"
   }
 }
 
@@ -38,6 +46,16 @@ resource "aws_lb_target_group" "external_api" {
     port                = 8080
     interval            = 30
   }
+
+  stickiness {
+    enabled         = true
+    type            = "lb_cookie"
+    cookie_duration = 86400
+  }
+
+  tags = {
+    env = "${var.env}"
+  }
 }
 
 resource "aws_lb_target_group" "internal_api" {
@@ -54,6 +72,16 @@ resource "aws_lb_target_group" "internal_api" {
     path                = "/healthz"
     port                = 8080
     interval            = 30
+  }
+
+  stickiness {
+    enabled         = true
+    type            = "lb_cookie"
+    cookie_duration = 86400
+  }
+
+  tags = {
+    env = "${var.env}"
   }
 }
 
@@ -77,6 +105,10 @@ resource "aws_lb_target_group" "state_channels_api" {
     enabled         = true
     type            = "lb_cookie"
     cookie_duration = 86400
+  }
+
+  tags = {
+    env = "${var.env}"
   }
 }
 
@@ -105,13 +137,13 @@ resource "aws_lb_listener_rule" "health_check" {
   }
 }
 
-resource "aws_lb_listener_rule" "dry-run" {
+resource "aws_lb_listener_rule" "internal_api" {
   count        = var.internal_api_enabled ? 1 : 0
   listener_arn = "${aws_alb_listener.api.arn}"
 
   condition {
     field  = "path-pattern"
-    values = ["/v2/debug/transactions/dry-run"]
+    values = ["/v2/debug/*"]
   }
 
   action {

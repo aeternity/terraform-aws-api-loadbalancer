@@ -29,3 +29,9 @@ variable "state_channel_api_enabled" {
   type        = bool
   default     = false
 }
+
+variable "env" {
+  description = "Used for tagging purposes only, thus the default for BC"
+  type        = string
+  default     = "unknown"
+}

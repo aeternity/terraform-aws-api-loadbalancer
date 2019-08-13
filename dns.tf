@@ -8,6 +8,10 @@ resource "aws_route53_health_check" "lb" {
   measure_latency   = false
   failure_threshold = "4"
   request_interval  = 30
+
+  tags = {
+    env = "${var.env}"
+  }
 }
 
 resource "aws_route53_record" "lb" {
