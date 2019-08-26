@@ -59,7 +59,7 @@ resource "aws_lb_target_group" "external_api" {
 }
 
 resource "aws_lb_target_group" "internal_api" {
-  count       = var.internal_api_enabled ? 1 : 0
+  count       = var.internal_api_enabled || var.dry_run_enabled ? 1 : 0
   name_prefix = "int-"
   port        = 3113
   protocol    = "HTTP"
@@ -144,6 +144,21 @@ resource "aws_lb_listener_rule" "internal_api" {
   condition {
     field  = "path-pattern"
     values = ["/v2/debug/*"]
+  }
+
+  action {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.internal_api.0.arn}"
+  }
+}
+
+resource "aws_lb_listener_rule" "dry_run" {
+  count        = var.dry_run_enabled ? 1 : 0
+  listener_arn = "${aws_alb_listener.api.arn}"
+
+  condition {
+    field  = "path-pattern"
+    values = ["/v2/debug/transactions/dry-run"]
   }
 
   action {
