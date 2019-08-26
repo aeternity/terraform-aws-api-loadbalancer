@@ -19,7 +19,13 @@ variable "dns_zone" {
 }
 
 variable "internal_api_enabled" {
-  description = "Enable internal API listener and allow traffic in security group"
+  description = "Enable internal API listener and allow traffic in security group. Includes dry-run."
+  type        = bool
+  default     = false
+}
+
+variable "dry_run_enabled" {
+  description = "Enable dry-run internal API endpoint only and allow traffic in security group"
   type        = bool
   default     = false
 }
