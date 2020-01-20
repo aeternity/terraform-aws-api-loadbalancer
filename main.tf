@@ -47,12 +47,6 @@ resource "aws_lb_target_group" "external_api" {
     interval            = 30
   }
 
-  stickiness {
-    enabled         = true
-    type            = "lb_cookie"
-    cookie_duration = 86400
-  }
-
   tags = {
     env = "${var.env}"
   }
@@ -74,12 +68,6 @@ resource "aws_lb_target_group" "internal_api" {
     interval            = 30
   }
 
-  stickiness {
-    enabled         = true
-    type            = "lb_cookie"
-    cookie_duration = 86400
-  }
-
   tags = {
     env = "${var.env}"
   }
@@ -99,12 +87,6 @@ resource "aws_lb_target_group" "state_channels_api" {
     path                = "/healthz"
     port                = 8080
     interval            = 30
-  }
-
-  stickiness {
-    enabled         = true
-    type            = "lb_cookie"
-    cookie_duration = 86400
   }
 
   tags = {
