@@ -23,8 +23,9 @@ EXT_STATUS=$(curl -sS -o /dev/null --retry 10 --retry-connrefused \
     http://${API_ADDR}/v2/debug/transactions/dry-run)
 [ $EXT_STATUS -eq 400 ]
 
+# Temporary disabled - https://github.com/aeternity/aeternity/issues/3131
 # State Channels WebSocket API
-WS_STATUS=$(curl -sS -o /dev/null --retry 10 --retry-connrefused \
-    -w "%{http_code}" \
-    http://${API_ADDR}/channel)
-[ $WS_STATUS -eq 426 ]
+# WS_STATUS=$(curl -sS -o /dev/null --retry 10 --retry-connrefused \
+#     -w "%{http_code}" \
+#     http://${API_ADDR}/channel)
+# [ $WS_STATUS -eq 426 ]
