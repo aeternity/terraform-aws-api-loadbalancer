@@ -10,6 +10,12 @@ variable "security_group" {
   description = "Security group to allow load balancer traffic to"
 }
 
+variable "sc_security_group" {
+  description = "State channels security group to allow load balancer traffic to"
+  type        = string
+  default     = "unknown"
+}
+
 variable "fqdn" {
   description = "Fully qualified domain name of the load balancer. Used for latency routing."
 }

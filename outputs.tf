@@ -7,6 +7,9 @@ output target_groups {
     list(aws_lb_target_group.api_health_check.arn),
     list(aws_lb_target_group.external_api.arn),
     aws_lb_target_group.internal_api.*.arn,
-    aws_lb_target_group.state_channels_api.*.arn
   )
+}
+
+output target_groups_channels {
+  value = aws_lb_target_group.state_channels_api.*.arn
 }

@@ -48,6 +48,6 @@ resource "aws_security_group_rule" "local_state_channels_api_in" {
   from_port                = 3014
   to_port                  = 3014
   protocol                 = "TCP"
-  security_group_id        = "${var.security_group}"
+  security_group_id        = "${var.sc_security_group != "unknown" ? var.sc_security_group : var.security_group}"
   source_security_group_id = "${aws_security_group.lb.id}"
 }
