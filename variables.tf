@@ -13,7 +13,7 @@ variable "security_group" {
 variable "sc_security_group" {
   description = "State channels security group to allow load balancer traffic to"
   type        = string
-  default     = "unknown"
+  default     = ""
 }
 
 variable "fqdn" {
