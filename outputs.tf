@@ -1,5 +1,5 @@
 output "fqdn" {
-  value = "${aws_route53_record.lb.name}"
+  value = aws_route53_record.lb.name
 }
 
 output target_groups {

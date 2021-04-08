@@ -8,7 +8,7 @@ resource "aws_lb" "api" {
   enable_deletion_protection = false
 
   tags = {
-    env = "${var.env}"
+    env = var.env
   }
 }
 
@@ -28,7 +28,7 @@ resource "aws_lb_target_group" "api_health_check" {
   }
 
   tags = {
-    env = "${var.env}"
+    env = var.env
   }
 }
 
@@ -48,7 +48,7 @@ resource "aws_lb_target_group" "external_api" {
   }
 
   tags = {
-    env = "${var.env}"
+    env = var.env
   }
 }
 
@@ -69,7 +69,7 @@ resource "aws_lb_target_group" "internal_api" {
   }
 
   tags = {
-    env = "${var.env}"
+    env = var.env
   }
 }
 
@@ -90,7 +90,7 @@ resource "aws_lb_target_group" "state_channels_api" {
   }
 
   tags = {
-    env = "${var.env}"
+    env = var.env
   }
 }
 
@@ -106,7 +106,7 @@ resource "aws_alb_listener" "api" {
 }
 
 resource "aws_lb_listener_rule" "health_check" {
-  listener_arn = "${aws_alb_listener.api.arn}"
+  listener_arn = aws_alb_listener.api.arn
 
   condition {
     field  = "path-pattern"
@@ -115,13 +115,13 @@ resource "aws_lb_listener_rule" "health_check" {
 
   action {
     type             = "forward"
-    target_group_arn = "${aws_lb_target_group.api_health_check.arn}"
+    target_group_arn = aws_lb_target_group.api_health_check.arn
   }
 }
 
 resource "aws_lb_listener_rule" "internal_api" {
   count        = var.internal_api_enabled ? 1 : 0
-  listener_arn = "${aws_alb_listener.api.arn}"
+  listener_arn = aws_alb_listener.api.arn
 
   condition {
     field  = "path-pattern"
@@ -130,13 +130,13 @@ resource "aws_lb_listener_rule" "internal_api" {
 
   action {
     type             = "forward"
-    target_group_arn = "${aws_lb_target_group.internal_api.0.arn}"
+    target_group_arn = aws_lb_target_group.internal_api.0.arn
   }
 }
 
 resource "aws_lb_listener_rule" "dry_run" {
   count        = var.dry_run_enabled ? 1 : 0
-  listener_arn = "${aws_alb_listener.api.arn}"
+  listener_arn = aws_alb_listener.api.arn
 
   condition {
     field  = "path-pattern"
@@ -145,13 +145,13 @@ resource "aws_lb_listener_rule" "dry_run" {
 
   action {
     type             = "forward"
-    target_group_arn = "${aws_lb_target_group.internal_api.0.arn}"
+    target_group_arn = aws_lb_target_group.internal_api.0.arn
   }
 }
 
 resource "aws_lb_listener_rule" "state_channels_api" {
   count        = var.state_channel_api_enabled ? 1 : 0
-  listener_arn = "${aws_alb_listener.api.arn}"
+  listener_arn = aws_alb_listener.api.arn
 
   condition {
     field  = "path-pattern"
@@ -160,6 +160,6 @@ resource "aws_lb_listener_rule" "state_channels_api" {
 
   action {
     type             = "forward"
-    target_group_arn = "${aws_lb_target_group.state_channels_api.0.arn}"
+    target_group_arn = aws_lb_target_group.state_channels_api.0.arn
   }
 }
