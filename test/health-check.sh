@@ -9,18 +9,27 @@ curl -sSf -o /dev/null --retry 10 --retry-connrefused http://${API_ADDR}/healthz
 
 # External API
 curl -sSf -o /dev/null --retry 10 --retry-connrefused http://${API_ADDR}/v2/status
+curl -sSf -o /dev/null --retry 10 --retry-connrefused http://${API_ADDR}/v3/status
 
 # Internal API (peers)
 curl -sSf -o /dev/null --retry 10 --retry-connrefused http://${API_ADDR}/v2/debug/peers
+curl -sSf -o /dev/null --retry 10 --retry-connrefused http://${API_ADDR}/v3/debug/peers
 
 # Internal API (pending transactions)
 curl -sSf -o /dev/null --retry 10 --retry-connrefused http://${API_ADDR}/v2/debug/transactions/pending
+curl -sSf -o /dev/null --retry 10 --retry-connrefused http://${API_ADDR}/v3/debug/transactions/pending
 
 # Internal API (dry-run)
 EXT_STATUS=$(curl -sS -o /dev/null --retry 10 --retry-connrefused \
     -X POST -H 'Content-type: application/json' -d '{}' \
     -w "%{http_code}" \
     http://${API_ADDR}/v2/debug/transactions/dry-run)
+[ $EXT_STATUS -eq 400 ]
+
+EXT_STATUS=$(curl -sS -o /dev/null --retry 10 --retry-connrefused \
+    -X POST -H 'Content-type: application/json' -d '{}' \
+    -w "%{http_code}" \
+    http://${API_ADDR}/v3/debug/transactions/dry-run)
 [ $EXT_STATUS -eq 400 ]
 
 # Temporary disabled - https://github.com/aeternity/aeternity/issues/3131
