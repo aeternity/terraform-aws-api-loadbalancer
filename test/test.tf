@@ -24,7 +24,7 @@ module "test_nodes_sydney" {
   asg_target_groups = module.test_gateway_lb.target_groups
 
   providers = {
-    aws = "aws.ap-southeast-2"
+    aws = aws.ap-southeast-2
   }
 }
 
@@ -40,6 +40,6 @@ module "test_gateway_lb" {
   subnets                   = module.test_nodes_sydney.subnets
 
   providers = {
-    aws = "aws.ap-southeast-2"
+    aws = aws.ap-southeast-2
   }
 }
