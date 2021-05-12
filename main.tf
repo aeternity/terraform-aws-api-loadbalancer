@@ -125,7 +125,7 @@ resource "aws_lb_listener_rule" "internal_api" {
 
   condition {
     field  = "path-pattern"
-    values = ["/v2/debug/*"]
+    values = ["/v?/debug/*"]
   }
 
   action {
@@ -140,7 +140,7 @@ resource "aws_lb_listener_rule" "dry_run" {
 
   condition {
     field  = "path-pattern"
-    values = ["/v2/debug/transactions/dry-run"]
+    values = ["/v?/debug/transactions/dry-run"]
   }
 
   action {
