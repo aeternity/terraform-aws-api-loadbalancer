@@ -23,10 +23,6 @@ module "test_nodes_sydney" {
 
   asg_target_groups = module.test_gateway_lb.target_groups
 
-  aeternity = {
-    package = "${var.package}"
-  }
-
   providers = {
     aws = "aws.ap-southeast-2"
   }
