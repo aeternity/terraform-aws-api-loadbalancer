@@ -5,10 +5,10 @@ locals {
 module "test_nodes_sydney" {
   source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=master"
   env               = "test"
-  envid             = "${var.envid}"
-  bootstrap_version = "${var.bootstrap_version}"
+  envid             = var.envid
+  bootstrap_version = var.bootstrap_version
   vault_role        = "ae-node"
-  vault_addr        = "${var.vault_addr}"
+  vault_addr        = var.vault_addr
 
   static_nodes   = 0
   spot_nodes_min = 1
