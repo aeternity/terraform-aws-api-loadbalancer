@@ -109,7 +109,7 @@ resource "aws_lb_listener_rule" "health_check" {
   listener_arn = aws_alb_listener.api.arn
 
   condition {
-    path-pattern {
+    path_pattern {
       values = ["/healthz"]
     }
   }
@@ -125,7 +125,7 @@ resource "aws_lb_listener_rule" "internal_api" {
   listener_arn = aws_alb_listener.api.arn
 
   condition {
-    path-pattern {
+    path_pattern {
       values = ["/v?/debug/*"]
     }
   }
@@ -141,7 +141,7 @@ resource "aws_lb_listener_rule" "dry_run" {
   listener_arn = aws_alb_listener.api.arn
 
   condition {
-    path-pattern {
+    path_pattern {
       values = ["/v?/debug/transactions/dry-run"]
     }
   }
@@ -157,7 +157,7 @@ resource "aws_lb_listener_rule" "state_channels_api" {
   listener_arn = aws_alb_listener.api.arn
 
   condition {
-    path-pattern {
+    path_pattern {
       values = ["/channel"]
     }
   }
