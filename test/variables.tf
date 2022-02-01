@@ -15,7 +15,7 @@ variable "vault_addr" {
 }
 
 variable "bootstrap_version" {
-  default = "master"
+  default = "bump-dataog-agent"
 }
 
 variable "package" {
