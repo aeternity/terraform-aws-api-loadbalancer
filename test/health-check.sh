@@ -12,8 +12,8 @@ curl -sSf -o /dev/null --retry 10 --retry-connrefused http://${API_ADDR}/v2/stat
 curl -sSf -o /dev/null --retry 10 --retry-connrefused http://${API_ADDR}/v3/status
 echo "Internal API (peers)"
 # Internal API (peers)
-curl -sSf --o /dev/null -retry 10 --retry-connrefused http://${API_ADDR}/v2/debug/peers
-curl -sSf --o /dev/null -retry 10 --retry-connrefused http://${API_ADDR}/v3/debug/peers
+curl -sSf -o /dev/null --retry 10 --retry-connrefused http://${API_ADDR}/v2/debug/peers
+curl -sSf -o /dev/null --retry 10 --retry-connrefused http://${API_ADDR}/v3/debug/peers
 echo "Internal API (pending transactions)"
 # Internal API (pending transactions)
 curl -sSf -o /dev/null --retry 10 --retry-connrefused http://${API_ADDR}/v2/debug/transactions/pending
