@@ -3,8 +3,8 @@ locals {
 }
 
 module "test_nodes_sydney" {
-  source            = "github.com/aeternity/terraform-aws-aenode-deploy?ref=master"
-  env               = "test"
+  source = "github.com/aeternity/terraform-aws-aenode-deploy?ref=master"
+  env    = "test"
 
   static_nodes   = 0
   spot_nodes_min = 1
