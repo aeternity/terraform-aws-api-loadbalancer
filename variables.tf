@@ -16,6 +16,12 @@ variable "sc_security_group" {
   default     = ""
 }
 
+variable "mdw_security_group" {
+  description = "Middleware security group to allow load balancer traffic to"
+  type        = string
+  default     = ""
+}
+
 variable "fqdn" {
   description = "Fully qualified domain name of the load balancer. Used for latency routing."
 }
@@ -42,8 +48,25 @@ variable "state_channel_api_enabled" {
   default     = false
 }
 
+variable "mdw_enabled" {
+  description = "Enables middleware HTTP and websockets API listener and allow traffic in security group"
+  type        = bool
+  default     = false
+}
+
 variable "env" {
   description = "Used for tagging purposes only, thus the default for BC"
   type        = string
   default     = "unknown"
+}
+
+variable "enable_ssl" {
+  description = "Enable SSL listeners"
+  type        = bool
+  default     = false
+}
+
+variable "certificate_arn" {
+  type    = string
+  default = ""
 }
