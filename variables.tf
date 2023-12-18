@@ -30,6 +30,11 @@ variable "dns_zone" {
   description = "DNS zone (AWS) of the FQDN domain"
 }
 
+variable "dns_health_check" {
+  type    = bool
+  default = true
+}
+
 variable "internal_api_enabled" {
   description = "Enable internal API listener and allow traffic in security group. Includes dry-run."
   type        = bool
