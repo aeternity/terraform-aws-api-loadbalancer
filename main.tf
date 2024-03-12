@@ -251,7 +251,7 @@ resource "aws_lb_listener_rule" "mdw_ws" {
 
   condition {
     path_pattern {
-      values = ["/v2/websocket"]
+      values = ["/v3/websocket"]
     }
   }
 
